@@ -11,21 +11,32 @@ import {
   Text,
   View
 } from 'react-native';
+import TabNavigator from 'react-native-tab-navigator';
 
 export default class ReactNativeDemo extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <TabNavigator>
+          <TabNavigator.Item
+              selected={this.state.selectedTab === 'home'}
+              title="Home"
+              renderIcon={() => <Image source={...} />}
+              renderSelectedIcon={() => <Image source={...} />}
+              badgeText="1"
+              onPress={() => this.setState({ selectedTab: 'home' })}>
+              {homeView}
+          </TabNavigator.Item>
+          <TabNavigator.Item
+              selected={this.state.selectedTab === 'profile'}
+              title="Profile"
+              renderIcon={() => <Image source={...} />}
+              renderSelectedIcon={() => <Image source={...} />}
+              renderBadge={() => <CustomBadgeView />}
+              onPress={() => this.setState({ selectedTab: 'profile' })}>
+              {profileView}
+          </TabNavigator.Item>
+        </TabNavigator>
       </View>
     );
   }
